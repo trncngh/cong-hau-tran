@@ -137,7 +137,6 @@ const closeConfirmationModal = (modal) => {
  * Simulate a swap transaction when the confirm button is clicked.
  */
 const acceptSwap = (modal) => {
-	console.log(modal);
 	modal.getElementsByClassName("modal-info")[0].style.display = "none";
 	modal.getElementsByClassName("modal-loader")[0].style.display = "block";
 	setTimeout(() => {
@@ -204,6 +203,8 @@ const main = async () => {
 	});
 	document.getElementById("confirm-close").addEventListener("click", () => {
 		closeConfirmationModal(confirmationModal);
+		inputAmountField.value = "";
+		outputAmountField.value = "";
 	});
 	document.getElementById("confirm-accept").addEventListener("click", () => {
 		acceptSwap(confirmationModal);
