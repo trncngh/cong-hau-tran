@@ -28,6 +28,7 @@ const fetchTokenData = async () => {
  * @param {HTMLElement} selectElement - The select element to add the default option to.
  */
 const createDefaultOption = (selectElement) => {
+	selectElement.innerHTML = ""; // Clear existing options
 	const defaultOption = document.createElement("option");
 	defaultOption.textContent = "Select a token";
 	defaultOption.value = "";
@@ -38,15 +39,19 @@ const createDefaultOption = (selectElement) => {
  * Populate a selects with token data.
  * @param {HTMLElement} selectElement - The select element to populate.
  * @param {Array} tokens - The array of token data.
+ * @param {string} excludeToken - The token to exclude from the select element.
  */
 
-const populateSelect = (selectElement, tokens) => {
-	tokens.forEach((token) => {
-		const option = document.createElement("option");
-		option.textContent = token.currency;
-		option.value = token.currency;
-		selectElement.appendChild(option);
-	});
+const populateSelect = (selectElement, tokens, excludeToken = "") => {
+	createDefaultOption(selectElement);
+	tokens
+		.filter((token) => token.currency !== excludeToken)
+		.forEach((token) => {
+			const option = document.createElement("option");
+			option.textContent = token.currency;
+			option.value = token.currency;
+			selectElement.appendChild(option);
+		});
 };
 
 /**
@@ -61,14 +66,17 @@ const main = async () => {
 	const outputToken = document.getElementById("output-token");
 
 	// Clear existing options and add default option
-	inputToken.innerHTML = "";
-	outputToken.innerHTML = "";
 	createDefaultOption(inputToken);
 	createDefaultOption(outputToken);
 
 	// Add tokens to the select elements
 	populateSelect(inputToken, tokens);
 	populateSelect(outputToken, tokens);
+
+	// Add event listener to input token select element that will update the output token select element dynamically
+	inputToken.addEventListener("change", () => {
+		populateSelect(outputToken, tokens, inputToken.value);
+	});
 };
 
 document.addEventListener("DOMContentLoaded", main);
