@@ -80,7 +80,7 @@ const calculateOutputAmount = (tokensData) => {
 
 	// Update the output amount field
 	document.getElementById("output-amount").value = outputAmount
-		? outputAmount.toFixed(6)
+		? outputAmount.toFixed(4)
 		: "";
 };
 
@@ -97,7 +97,6 @@ const restrictInvalidCharacters = (event) => {
 /**
  * Updates the state of the Swap button based on form validity.
  */
-
 const updateSwapButtonState = (inputToken, outputToken, inputAmount) => {
 	const swapButton = document.getElementById("swap-button");
 	swapButton.disabled = !(
@@ -105,6 +104,33 @@ const updateSwapButtonState = (inputToken, outputToken, inputAmount) => {
 		outputToken.value !== "" &&
 		inputAmount.value.trim() !== ""
 	);
+};
+
+/**
+ * Open confirmation modal.
+ */
+const openConfirmationModal = (
+	modal,
+	inputToken,
+	inputAmount,
+	outputToken,
+	outputAmount
+) => {
+	document.getElementById("confirm-input-token").textContent = inputToken.value;
+	document.getElementById("confirm-input-amount").textContent =
+		inputAmount.value;
+	document.getElementById("confirm-output-token").textContent =
+		outputToken.value;
+	document.getElementById("confirm-output-amount").textContent =
+		outputAmount.value;
+	modal.style.display = "flex";
+};
+
+/**
+ * Close confirmation modal.
+ */
+const closeConfirmationModal = (modal) => {
+	modal.style.display = "none";
 };
 
 /**
@@ -118,6 +144,9 @@ const main = async () => {
 	const inputToken = document.getElementById("input-token");
 	const outputToken = document.getElementById("output-token");
 	const inputAmountField = document.getElementById("input-amount");
+	const outputAmountField = document.getElementById("output-amount");
+	const swapButton = document.getElementById("swap-button");
+	const confirmationModal = document.getElementById("confirmation-modal");
 
 	// Clear existing options and add default option
 	createDefaultOption(inputToken);
@@ -145,6 +174,20 @@ const main = async () => {
 		updateSwapButtonState(inputToken, outputToken, inputAmountField);
 	});
 	updateSwapButtonState(inputToken, outputToken, inputAmountField);
+	// Add event listener to swap button
+	swapButton.addEventListener("click", () => {
+		openConfirmationModal(
+			confirmationModal,
+			inputToken,
+			inputAmountField,
+			outputToken,
+			outputAmountField
+		);
+	});
+	// Add event listener to confirm button
+	document.getElementById("confirm-cancel").addEventListener("click", () => {
+		closeConfirmationModal(confirmationModal);
+	});
 };
 
 document.addEventListener("DOMContentLoaded", main);

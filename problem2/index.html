@@ -48,7 +48,7 @@
 				</fieldset>
 			</div>
 
-			<button type="submit" class="btn btn-primary" id="swap-button">
+			<button type="button" class="btn btn-primary" id="swap-button">
 				CONFIRM SWAP
 			</button>
 		</form>
@@ -56,16 +56,14 @@
 			<div class="modal-content">
 				<h2>Confirm Swap</h2>
 
-				<span id="confirm-input-amount">23</span>
-				<span id="confirm-input-token">USDT</span> to
-				<span id="confirm-output-amount">0.0001</span>
-				<span id="confirm-output-token">ETH</span>
+				<span id="confirm-input-amount"></span>
+				<span id="confirm-input-token"></span> to
+				<span id="confirm-output-amount"></span>
+				<span id="confirm-output-token"></span>
 
 				<div class="modal-actions">
-					<button id="confirm-accept" onclick="acceptSwap()">Confirm</button>
-					<button id="confirm-cancel" onclick="closeModal()">
-						Cancel
-					</button>
+					<button id="confirm-accept" type="button">Confirm</button>
+					<button id="confirm-cancel" type="button">Cancel</button>
 				</div>
 			</div>
 		</div>
