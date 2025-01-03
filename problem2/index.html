@@ -54,16 +54,24 @@
 		</form>
 		<div id="confirmation-modal" class="modal">
 			<div class="modal-content">
-				<h2>Confirm Swap</h2>
+				<div class="modal-info">
+					<h2>Confirm Swap</h2>
+					<span id="confirm-input-amount"></span>
+					<span id="confirm-input-token"></span> to
+					<span id="confirm-output-amount"></span>
+					<span id="confirm-output-token"></span>
 
-				<span id="confirm-input-amount"></span>
-				<span id="confirm-input-token"></span> to
-				<span id="confirm-output-amount"></span>
-				<span id="confirm-output-token"></span>
-
-				<div class="modal-actions">
-					<button id="confirm-accept" type="button">Confirm</button>
-					<button id="confirm-cancel" type="button">Cancel</button>
+					<div class="modal-actions">
+						<button id="confirm-accept" type="button">Confirm</button>
+						<button id="confirm-cancel" type="button">Cancel</button>
+					</div>
+				</div>
+				<div class="modal-loader">
+					<h2>Executing transaction...</h2>
+				</div>
+				<div class="modal-announcement">
+					<h2>Transaction Successfully!</h2>
+					<button id="confirm-close" type="button">Close</button>
 				</div>
 			</div>
 		</div>

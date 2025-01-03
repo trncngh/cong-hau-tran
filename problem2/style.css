@@ -137,6 +137,16 @@ button:disabled {
   text-align: center;
 }
 
+.modal-info{
+  display: block;
+}
+.modal-loader{
+  display: none;
+}
+.modal-announcement{
+  display: none;
+}
+
 /* Buttons container to align them on the same line */
 .modal-actions {
   display: flex;
@@ -144,6 +154,7 @@ button:disabled {
   gap: 10px;
   margin-top: 20px;
 }
+
 
 button {
   padding: 10px 20px;

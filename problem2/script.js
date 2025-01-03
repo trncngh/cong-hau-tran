@@ -134,6 +134,20 @@ const closeConfirmationModal = (modal) => {
 };
 
 /**
+ * Simulate a swap transaction when the confirm button is clicked.
+ */
+const acceptSwap = (modal) => {
+	console.log(modal);
+	modal.getElementsByClassName("modal-info")[0].style.display = "none";
+	modal.getElementsByClassName("modal-loader")[0].style.display = "block";
+	setTimeout(() => {
+		modal.getElementsByClassName("modal-loader")[0].style.display = "none";
+		modal.getElementsByClassName("modal-announcement")[0].style.display =
+			"block";
+	}, 3000); // Simulate a 3-second transaction
+};
+
+/**
  * Main function
  */
 const main = async () => {
@@ -184,9 +198,15 @@ const main = async () => {
 			outputAmountField
 		);
 	});
-	// Add event listener to confirm button
+	// Add event listener to modal's buttons
 	document.getElementById("confirm-cancel").addEventListener("click", () => {
 		closeConfirmationModal(confirmationModal);
+	});
+	document.getElementById("confirm-close").addEventListener("click", () => {
+		closeConfirmationModal(confirmationModal);
+	});
+	document.getElementById("confirm-accept").addEventListener("click", () => {
+		acceptSwap(confirmationModal);
 	});
 };
 
