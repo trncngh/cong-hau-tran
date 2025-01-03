@@ -110,6 +110,11 @@ button:focus {
 	outline: none;
 }
 
+button:disabled {
+  background-color: #c0c0c0;
+  cursor: not-allowed;
+}
+
 
 @media (max-width: 768px) {
 	.fieldset-container {

@@ -41,10 +41,14 @@ const createDefaultOption = (selectElement) => {
  * @param {Array} tokens - The array of token data.
  * @param {string} excludeToken - The token to exclude from the select element.
  */
-const populateSelect = (selectElement, tokens, excludeToken = "") => {
+const populateSelect = (
+	selectElement,
+	tokens,
+	excludeToken = { value: "" }
+) => {
 	createDefaultOption(selectElement);
 	tokens
-		.filter((token) => token.currency !== excludeToken)
+		.filter((token) => token.currency !== excludeToken.value)
 		.forEach((token) => {
 			const option = document.createElement("option");
 			option.textContent = token.currency;
@@ -55,6 +59,7 @@ const populateSelect = (selectElement, tokens, excludeToken = "") => {
 
 /**
  * Calculate the output amount based on selected tokens and input amount.
+ * @param {Array} tokensData - The array of token data.
  */
 const calculateOutputAmount = (tokensData) => {
 	const inputToken = document.getElementById("input-token").value;
@@ -90,6 +95,19 @@ const restrictInvalidCharacters = (event) => {
 };
 
 /**
+ * Updates the state of the Swap button based on form validity.
+ */
+
+const updateSwapButtonState = (inputToken, outputToken, inputAmount) => {
+	const swapButton = document.getElementById("swap-button");
+	swapButton.disabled = !(
+		inputToken.value !== "" &&
+		outputToken.value !== "" &&
+		inputAmount.value.trim() !== ""
+	);
+};
+
+/**
  * Main function
  */
 const main = async () => {
@@ -112,17 +130,21 @@ const main = async () => {
 	// Add event listener to input token select element that will update the output token select element dynamically
 	inputToken.addEventListener("change", () => {
 		if (inputToken.value === outputToken.value || outputToken.value === "") {
-			populateSelect(outputToken, tokenData, inputToken.value);
+			populateSelect(outputToken, tokenData, inputToken);
 		}
 		calculateOutputAmount(tokenData);
+		updateSwapButtonState(inputToken, outputToken, inputAmountField);
 	});
 	inputAmountField.addEventListener("keydown", restrictInvalidCharacters);
-	inputAmountField.addEventListener("input", () =>
-		calculateOutputAmount(tokenData)
-	);
-	outputToken.addEventListener("change", () =>
-		calculateOutputAmount(tokenData)
-	);
+	inputAmountField.addEventListener("input", () => {
+		calculateOutputAmount(tokenData);
+		updateSwapButtonState(inputToken, outputToken, inputAmountField);
+	});
+	outputToken.addEventListener("change", () => {
+		calculateOutputAmount(tokenData);
+		updateSwapButtonState(inputToken, outputToken, inputAmountField);
+	});
+	updateSwapButtonState(inputToken, outputToken, inputAmountField);
 };
 
 document.addEventListener("DOMContentLoaded", main);
