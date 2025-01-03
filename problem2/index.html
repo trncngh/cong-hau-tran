@@ -6,45 +6,47 @@
 		<link href="style.css" rel="stylesheet" />
 	</head>
 	<body>
-		<form onsubmit="return false">
+		<form class="swap-form" onsubmit="return false">
 			<h5>Swap Token</h5>
 
-			<fieldset>
-				<legend>Token to Send</legend>
-				<div class="form-group">
-					<label for="input-token">Token</label>
-					<select id="input-token" class="form-control"></select>
-				</div>
-				<div class="form-group">
-					<label for="input-amount">Amount</label>
-					<input
-						min="0"
-						id="input-amount"
-						type="number"
-						class="form-control"
-						placeholder="Enter amount"
-					/>
-				</div>
-			</fieldset>
+			<div class="fieldset-container">
+				<fieldset class="fieldset-send">
+					<legend>Token to Send</legend>
+					<div class="form-group">
+						<label for="input-token">Token</label>
+						<select id="input-token" class="form-control"></select>
+					</div>
+					<div class="form-group">
+						<label for="input-amount">Amount</label>
+						<input
+							min="0"
+							id="input-amount"
+							type="number"
+							class="form-control"
+							placeholder="Enter amount"
+						/>
+					</div>
+				</fieldset>
 
-			<fieldset>
-				<legend>Token to Receive</legend>
-				<div class="form-group">
-					<label for="output-token">Token</label>
-					<select id="output-token" class="form-control"></select>
-				</div>
-				<div class="form-group">
-					<label for="output-amount">Amount</label>
-					<input
-						disabled
-						id="output-amount"
-						type="number"
-						class="form-control"
-						placeholder="Received amount"
-						readonly
-					/>
-				</div>
-			</fieldset>
+				<fieldset class="fieldset-receive">
+					<legend>Token to Receive</legend>
+					<div class="form-group">
+						<label for="output-token">Token</label>
+						<select id="output-token" class="form-control"></select>
+					</div>
+					<div class="form-group">
+						<label for="output-amount">Amount</label>
+						<input
+							disabled
+							id="output-amount"
+							type="number"
+							class="form-control"
+							placeholder="Received amount"
+							readonly
+						/>
+					</div>
+				</fieldset>
+			</div>
 
 			<button type="submit" class="btn btn-primary">CONFIRM SWAP</button>
 		</form>
