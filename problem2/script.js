@@ -80,6 +80,16 @@ const calculateOutputAmount = (tokensData) => {
 };
 
 /**
+ * Prevents user from entering negative sign "-" and "e" in the input amount field.
+ */
+const restrictInvalidCharacters = (event) => {
+	const invalidKeys = ["-", "e", "E"];
+	if (invalidKeys.includes(event.key)) {
+		event.preventDefault();
+	}
+};
+
+/**
  * Main function
  */
 const main = async () => {
@@ -106,6 +116,7 @@ const main = async () => {
 		}
 		calculateOutputAmount(tokenData);
 	});
+	inputAmountField.addEventListener("keydown", restrictInvalidCharacters);
 	inputAmountField.addEventListener("input", () =>
 		calculateOutputAmount(tokenData)
 	);
