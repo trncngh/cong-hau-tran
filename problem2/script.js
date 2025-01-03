@@ -63,10 +63,12 @@ const calculateOutputAmount = (tokensData) => {
 		parseFloat(document.getElementById("input-amount").value) || 0;
 
 	// Find rates for the selected tokens
-	const inputRate =
-		tokensData.find((token) => token.currency === inputToken)?.price || 1;
-	const outputRate =
-		tokensData.find((token) => token.currency === outputToken)?.price || 1;
+	const inputRate = tokensData.find(
+		(token) => token.currency === inputToken
+	)?.price;
+	const outputRate = tokensData.find(
+		(token) => token.currency === outputToken
+	)?.price;
 
 	// Calculate output amount
 	const outputAmount = (inputAmount * inputRate) / outputRate;
@@ -78,7 +80,7 @@ const calculateOutputAmount = (tokensData) => {
 };
 
 /**
- * Main function to distribute tokens to the select elements.
+ * Main function
  */
 const main = async () => {
 	// Fetch token data
@@ -99,7 +101,10 @@ const main = async () => {
 
 	// Add event listener to input token select element that will update the output token select element dynamically
 	inputToken.addEventListener("change", () => {
-		populateSelect(outputToken, tokenData, inputToken.value);
+		if (inputToken.value === outputToken.value || outputToken.value === "") {
+			populateSelect(outputToken, tokenData, inputToken.value);
+		}
+		calculateOutputAmount(tokenData);
 	});
 	inputAmountField.addEventListener("input", () =>
 		calculateOutputAmount(tokenData)
