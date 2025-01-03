@@ -1,27 +1,50 @@
 <html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Fancy Form</title>
+		<link href="style.css" rel="stylesheet" />
+	</head>
+	<body>
+		<form onsubmit="return false">
+			<h5>Swap Token</h5>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
+			<fieldset>
+				<legend>Token to Send</legend>
+				<div class="form-group">
+					<label for="input-token">Token</label>
+					<select id="input-token" class="form-control"></select>
+				</div>
+				<div class="form-group">
+					<label for="input-amount">Amount</label>
+					<input
+						id="input-amount"
+						type="number"
+						class="form-control"
+						placeholder="Enter amount"
+					/>
+				</div>
+			</fieldset>
 
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
-</head>
+			<fieldset>
+				<legend>Token to Receive</legend>
+				<div class="form-group">
+					<label for="output-token">Token</label>
+					<select id="output-token" class="form-control"></select>
+				</div>
+				<div class="form-group">
+					<label for="output-amount">Amount</label>
+					<input
+						id="output-amount"
+						type="number"
+						class="form-control"
+						placeholder="Received amount"
+						readonly
+					/>
+				</div>
+			</fieldset>
 
-<body>
-
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
-
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
-
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
-</body>
-
+			<button type="submit" class="btn btn-primary">CONFIRM SWAP</button>
+		</form>
+		<script src="script.js"></script>
+	</body>
 </html>
