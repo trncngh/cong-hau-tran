@@ -52,6 +52,23 @@
 				CONFIRM SWAP
 			</button>
 		</form>
+		<div id="confirmation-modal" class="modal">
+			<div class="modal-content">
+				<h2>Confirm Swap</h2>
+
+				<span id="confirm-input-amount">23</span>
+				<span id="confirm-input-token">USDT</span> to
+				<span id="confirm-output-amount">0.0001</span>
+				<span id="confirm-output-token">ETH</span>
+
+				<div class="modal-actions">
+					<button id="confirm-accept" onclick="acceptSwap()">Confirm</button>
+					<button id="confirm-cancel" onclick="closeModal()">
+						Cancel
+					</button>
+				</div>
+			</div>
+		</div>
 		<script src="script.js"></script>
 	</body>
 </html>
