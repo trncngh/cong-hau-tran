@@ -41,7 +41,6 @@ const createDefaultOption = (selectElement) => {
  * @param {Array} tokens - The array of token data.
  * @param {string} excludeToken - The token to exclude from the select element.
  */
-
 const populateSelect = (selectElement, tokens, excludeToken = "") => {
 	createDefaultOption(selectElement);
 	tokens
@@ -55,28 +54,59 @@ const populateSelect = (selectElement, tokens, excludeToken = "") => {
 };
 
 /**
+ * Calculate the output amount based on selected tokens and input amount.
+ */
+const calculateOutputAmount = (tokensData) => {
+	const inputToken = document.getElementById("input-token").value;
+	const outputToken = document.getElementById("output-token").value;
+	const inputAmount =
+		parseFloat(document.getElementById("input-amount").value) || 0;
+
+	// Find rates for the selected tokens
+	const inputRate =
+		tokensData.find((token) => token.currency === inputToken)?.price || 1;
+	const outputRate =
+		tokensData.find((token) => token.currency === outputToken)?.price || 1;
+
+	// Calculate output amount
+	const outputAmount = (inputAmount * inputRate) / outputRate;
+
+	// Update the output amount field
+	document.getElementById("output-amount").value = outputAmount
+		? outputAmount.toFixed(6)
+		: "";
+};
+
+/**
  * Main function to distribute tokens to the select elements.
  */
 const main = async () => {
 	// Fetch token data
-	const tokens = await fetchTokenData();
+	const tokenData = await fetchTokenData();
 
 	// Select elements
 	const inputToken = document.getElementById("input-token");
 	const outputToken = document.getElementById("output-token");
+	const inputAmountField = document.getElementById("input-amount");
 
 	// Clear existing options and add default option
 	createDefaultOption(inputToken);
 	createDefaultOption(outputToken);
 
 	// Add tokens to the select elements
-	populateSelect(inputToken, tokens);
-	populateSelect(outputToken, tokens);
+	populateSelect(inputToken, tokenData);
+	populateSelect(outputToken, tokenData);
 
 	// Add event listener to input token select element that will update the output token select element dynamically
 	inputToken.addEventListener("change", () => {
-		populateSelect(outputToken, tokens, inputToken.value);
+		populateSelect(outputToken, tokenData, inputToken.value);
 	});
+	inputAmountField.addEventListener("input", () =>
+		calculateOutputAmount(tokenData)
+	);
+	outputToken.addEventListener("change", () =>
+		calculateOutputAmount(tokenData)
+	);
 };
 
 document.addEventListener("DOMContentLoaded", main);
