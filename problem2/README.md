@@ -3,7 +3,7 @@
 Duration: You should not spend more than 16 hours on this problem.
 Time estimation is for internship roles, if you are a software professional you should spend significantly less time.
 
-# Task
+## Task
 
 Create a currency swap form based on the template provided in the folder. A user would use this form to swap assets from one currency to another.
 
@@ -24,3 +24,19 @@ Please submit your solution using the files provided in the skeletal repo, inclu
 <aside>
 💡 Hint: feel free to simulate or mock interactions with a backend service, e.g. implement a loading indicator with a timeout delay for the submit button is good enough.
 </aside>
+
+# Solution
+
+Simply open the `index.html` file in your browser to view the solution.
+
+Or you can install the dependencies and run the project using the following commands:
+
+```
+yarn install
+```
+
+```
+yarn dev
+```
+
+The application will be running on `http://localhost:5173/`
