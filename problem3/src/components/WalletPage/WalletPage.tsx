@@ -14,6 +14,7 @@ interface WalletBalance {
   blockchain: string //missing blockchain property to define the blockchain type
 }
 interface FormattedWalletBalance {
+  // this interface can be extended from WalletBalance
   currency: string
   amount: number
   formatted: string
@@ -29,10 +30,11 @@ interface BoxProps {
 
 interface Props extends BoxProps {} // BoxProps is missing here, so I assume it is a type being defined somewhere else.
 const WalletPage: React.FC<Props> = (props: Props) => {
-  const { children, ...rest } = props //
+  const { children, ...rest } = props // using ambigous ...rest operator, it should be defined as Props
   const balances = useWalletBalances()
   const prices = usePrices()
 
+  // this function should be defined outside of the component
   const getPriority = (blockchain: any): number => {
     // any type is used here, it should have better type definition, eg. string
     switch (blockchain) {
@@ -56,6 +58,7 @@ const WalletPage: React.FC<Props> = (props: Props) => {
    * but the filter isnt implemented correctly.
    * that leads to the sort function always returns empty array []
    * hence, even if all data is fetched and all errors are fixed this component woulnd render anything on client side
+   * this function should be defined outside of the component
    */
   const sortedBalances = useMemo(() => {
     return balances
@@ -82,25 +85,28 @@ const WalletPage: React.FC<Props> = (props: Props) => {
       })
   }, [balances, prices])
 
+  /**
+   * same as the sortedBalances, this function should be defined outside of the component
+   */
   const formattedBalances = sortedBalances.map((balance: WalletBalance) => {
     return {
       ...balance,
       formatted: balance.amount.toFixed(),
     }
   })
-  console.log('balances', balances)
-  console.log('prices', prices)
-  console.log('sortedBalances', sortedBalances)
 
   //   const rows = sortedBalances.map(   // it should be formattedBalances
   const rows = formattedBalances.map(
     (balance: FormattedWalletBalance, index: number) => {
+      // the purpose of this function is just to format the amount and returns the WalletRow component, so calculating the usdValue here is go against the single responsibility principle
       const usdValue = prices[balance.currency] * balance.amount
       // the WalletRow is considered as atom (or molecule) component, it should only display the formatted amount, providing amount here is unnecessary
+      // furthermore, it should display the currency as well
+      // if the main purpose of this component is to display the formatted amount, then all the data should be displayed as a data table.
       return (
         <WalletRow
           // className={classes.row} classes is not defined
-          key={index}
+          key={index} // using array index as key is not recommended
           amount={balance.amount}
           usdValue={usdValue}
           formattedAmount={balance.formatted}

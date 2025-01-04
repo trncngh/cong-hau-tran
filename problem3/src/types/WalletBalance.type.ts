@@ -7,3 +7,8 @@ export type WalletBalance = {
 export type Prices = {
   [currency: string]: number
 }
+
+export type FormattedWalletBalance = WalletBalance & {
+  formattedAmount: string
+  usdValue: number
+}
