@@ -2,7 +2,7 @@
 
 # Check if folder_name argument is provided
 if [ -z "$1" ]; then
-    read -p "No folder name provided. Please enter the folder name: " folder_name
+    read -p "No feature name provided. Please enter the feature name: " folder_name
 else
     # Use the provided folder name to create the new folder and files
     folder_name="$1"
