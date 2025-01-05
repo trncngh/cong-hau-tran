@@ -5,9 +5,31 @@
  * and WalletRow component is a simple component that takes props and renders them.
  */
 import WalletRow from '@/components/WalletRow/WalletRow'
-import { usePrices } from '@/hooks/usePrices'
-import { useWalletBalances } from '@/hooks/useWalletBalances' //importing missing useWalletBalances hook
+import { Prices } from '@/types/WalletBalance.type'
 import { useMemo } from 'react'
+
+/**
+ * declare missing hooks
+ */
+
+const usePrices = (): Prices => {
+  // return mock data for prices
+  const prices = {
+    OSMO: 0.14,
+    ETH: 50,
+  }
+  return prices
+}
+export const useWalletBalances = (): WalletBalance[] => {
+  // return mock data for wallet balances
+  const balances: WalletBalance[] = [
+    { blockchain: 'Osmosis', currency: 'OSMO', amount: 100 },
+    { blockchain: 'Ethereum', currency: 'ETH', amount: 50 },
+    { blockchain: 'Terra', currency: 'LUN', amount: 50 },
+  ]
+  return balances
+}
+
 interface WalletBalance {
   currency: string
   amount: number

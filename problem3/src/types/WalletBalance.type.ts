@@ -10,5 +10,5 @@ export type Prices = {
 
 export type FormattedWalletBalance = WalletBalance & {
   formattedAmount: string
-  usdValue: number
+  usdValue: string
 }

@@ -9,7 +9,7 @@ import { Prices } from '@/types/WalletBalance.type'
 export const usePrices = (): Prices => {
   // return mock data for prices
   const prices = {
-    OSMO: 100,
+    OSMO: 0.14,
     ETH: 50,
   }
   return prices

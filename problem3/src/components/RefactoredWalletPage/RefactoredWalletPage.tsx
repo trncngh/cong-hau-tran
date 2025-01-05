@@ -11,16 +11,27 @@ const RefactoredWalletPage = ({
 }: TRefactoredWalletPageProps & { className?: string }) => {
   return (
     <div className={`${className}`}>
-      {balances.map((balance: FormattedWalletBalance, index: number) => {
-        return (
-          <RefactoredWalletRow
-            currency={balance.currency}
-            formattedAmount={balance.formattedAmount}
-            usdValue={balance.usdValue}
-            key={balance.currency} // This is not a good key, but it's the only unique value in the object
-          />
-        )
-      })}
+      <table className="w-full table-auto">
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Amount</th>
+            <th>Value(USDT)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {balances.map((balance: FormattedWalletBalance, index: number) => {
+            return (
+              <RefactoredWalletRow
+                currency={balance.currency}
+                formattedAmount={balance.formattedAmount}
+                usdValue={balance.usdValue}
+                key={balance.currency} // This is not a good key, but it's the only unique value in the object
+              />
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }
