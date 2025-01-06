@@ -27,6 +27,13 @@ Please submit your solution using the files provided in the skeletal repo, inclu
 
 # Solution
 
+## Spike:
+
+I assume that the user will be able to swap between two tokens. The user will select the token to swap from and the token to swap to. The user will then enter the amount of the token to swap from. The user will then see the amount of the token to swap to. The user will then click the swap button to complete the swap.
+I decided to use notifyless approach for this form, which means theres no actual validation on the form but the 'CONFIRM SWAP' button will be disabled until the user selects the tokens and enters the amount to swap.
+
+## Running the solution
+
 Simply open the `index.html` file in your browser to view the solution.
 
 Or you can install the dependencies and run the project using the following commands:
