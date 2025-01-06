@@ -2,14 +2,10 @@
 
 99tech code challenge
 
-## 99Tech Code Challenge #1
+## Note
 
-Note that if you fork this repository, your responses may be publicly linked to this repo.  
-Please submit your application along with the solutions attached or linked.
+I have separated the problems into different folders. Each folder contains a README.md file that describes the problem and the solution.
+In terms of my application (FrontEnd Dev), I have completed problem 1, 2, and 3. But as mentioned in the code challenge, I wanna try to solve all the problems for Full-Stack Engineer role, I acknowledge that currently you guys only open for Backend and Frontend roles. But I still wanna give it a try, hope you guys don't mind.
+I moved the problem 6 to 4 because of the duplication.
 
-It is important that you minimally attempt the problems, even if you do not arrive at a working solution.
-
-## Submission
-
-You can either provide a link to an online repository, attach the solution in your application, or whichever method you prefer.
-We're cool as long as we can view your solution without any pain.
+If you got trouble installing the dependencies(like I had), please use yarn instead of npm.
