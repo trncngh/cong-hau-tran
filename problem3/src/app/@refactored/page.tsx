@@ -22,7 +22,7 @@ const RefactoredComponent = ({ className = '' }: TRefactoredComponentProps) => {
 
   return (
     <div className={`${className} w-1/2`}>
-      RefactoredComponent
+      Refactored Component
       <RefactoredWalletPage balances={formattedBalances} />
     </div>
   )

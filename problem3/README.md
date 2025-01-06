@@ -96,39 +96,61 @@ const WalletPage: React.FC<Props> = (props: Props) => {
   )
 }
 ```
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Solution
 
-First, run the development server:
+## Investigating the issues:
+
+For more details please take a look at the comments in `@/components/WalletPage.tsx` file. I managed to let it run, and during the process, I found the following issues:
+
+- `lhsPriority` is not defined in the `sortedBalances` function, which cause typo error.
+- the filter and sort functions was implemented in a wrong way, which cause the function to return an empty array.
+- interms of single responsibility principle, the `WalletPage` component is doing too much, it should be broken down into smaller components.
+- formattedBalances is delacred but forgot to use it.
+- even with the rows rendering, the `ammount` is uneceesary because we already have the `formattedAmount` which is the same as `amount` but in string format, and for displaying total Assets table it still missing the currency symbol which is critical for the user to understand the value of the assets.
+- the `WalletPage` itself take responsibility for displaying assets, and that should be data table component, using div and try to make it look like a table is not a good practice for accessibility and SEO.
+- using `{chilren, ...rest}` ambiguity, it's better to use `props` directly and destructure it.
+
+## Refactoring:
+
+As I mentioned above, I had to managed to keep the "original" code running, and for the better comparison I decided to set up a Nextjs project with 2 slots, one for the original code and the other for the refactored code (although the origin code would returns nothing because of the wrong implementation of sort.filter balance function).
+
+But anyways, you can find the original and the refactored code inside the `@/components` folder, and if you're interested with how its integrated with Nextjs, you can take a look at the `@/app/layout` file.
+
+## Running the project:
+
+### Pre-requisites:
+
+- Nodejs, (any package manager you prefer, I used `yarn`).
+
+### Installation:
+
+In the project directory, you can run:
+
+```bash
+yarn install
+# or
+npm run install
+# or
+...
+```
+
+for installing the dependencies.
+
+### Running the project:
 
 ```bash
 npm run dev
 # or
 yarn dev
 # or
-pnpm dev
-# or
-bun dev
+...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result with the Origin component on the left and the refactored component on the right.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I use my own boilerplate for this project, and it comes along with storybook as well, so you can run the storybook by running:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+  yarn sb
+```

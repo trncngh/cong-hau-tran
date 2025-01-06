@@ -11,7 +11,7 @@ const RefactoredWalletPage = ({
 }: TRefactoredWalletPageProps & { className?: string }) => {
   return (
     <div className={`${className}`}>
-      <table className="w-full table-auto">
+      <table className="w-full table-auto text-left">
         <thead>
           <tr>
             <th>Currency</th>

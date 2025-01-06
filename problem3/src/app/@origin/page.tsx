@@ -7,7 +7,7 @@ type TOriginComponentProps = {
 const OriginComponent = ({ className = '' }: TOriginComponentProps) => {
   return (
     <div className={`${className} w-1/2`}>
-      OriginComponent
+      Origin Component
       <WalletPage />
     </div>
   )
