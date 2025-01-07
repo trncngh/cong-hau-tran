@@ -94,8 +94,6 @@ const restrictInvalidCharacters = (event) => {
  */
 const updateSwapButtonState = (inputToken, outputToken, inputAmount) => {
 	const swapButton = document.querySelector("#swap-button");
-	console.log(inputToken.dataset.price);
-	console.log(outputToken.dataset);
 	swapButton.disabled = !(
 		inputToken.dataset.price &&
 		outputToken.dataset.price &&
