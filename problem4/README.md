@@ -39,15 +39,15 @@ Write the specification for a software module on the API service (backend applic
 4. The application should have an authentication and authorization mechanism to prevent malicious users from increasing scores without authorization.
 
 ### Basic usecase diagram
+![image](https://github.com/user-attachments/assets/2480078e-4f17-4c75-ac53-08a22755e177)
 
-[insert action flow diagram here]
+### Activities architect
+![image](https://github.com/user-attachments/assets/6cbd541d-c69f-4618-9d93-700ae3e39c68)
 
-### activities diagram
-
-[insert activities diagram here]
 
 ### API Documentation
 
 TBD
 
 ## User Stories
+
