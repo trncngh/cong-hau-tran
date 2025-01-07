@@ -12,13 +12,10 @@ export const createProduct = async (
 	next: NextFunction
 ) => {
 	const { name, price, stock } = req.body;
-	console.log(req.body);
-
 	if (!name || !price || !stock) {
 		// send to error handler
 		next(new ValidationError("All field is required"));
 	}
-
 	try {
 		const data = await prisma.product.create({
 			data: {
@@ -27,9 +24,6 @@ export const createProduct = async (
 				stock,
 			},
 		});
-		console.log(data);
-
-		// response success with a data
 		res.status(200).json(responseSuccessWithData(data));
 	} catch (error) {
 		// send to error handler
@@ -47,23 +41,51 @@ export const getProduct = async (
 		// send to error handler
 		next(new ValidationError("Id is required"));
 	}
-
 	try {
 		const data = await prisma.product.findUnique({
 			where: {
 				id: id,
 			},
 		});
-		console.log(data);
-
-		// response success with a data
 		res.status(200).json(responseSuccessWithData(data));
 	} catch (error) {
 		// send to error handler
 		next(error);
 	}
 };
+export const filterProducts = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const { name, description, price, stock } = req.query;
 
+	if (!name && !description && !price && !stock) {
+		// send to error handler
+		return next(
+			new ValidationError("At least one query parameter is required")
+		);
+	}
+
+	try {
+		const data = await prisma.product.findMany({
+			where: {
+				AND: [
+					...(name ? [{ name: { contains: name as string } }] : []),
+					...(description
+						? [{ description: { contains: description as string } }]
+						: []),
+					...(price ? [{ price: { lte: parseFloat(price as string) } }] : []),
+					...(stock ? [{ stock: { gt: 1 } }] : []),
+				],
+			},
+		});
+		res.status(200).json(responseSuccessWithData(data));
+	} catch (error) {
+		// send to error handler
+		next(error);
+	}
+};
 export const getProducts = async (
 	req: Request,
 	res: Response,
@@ -71,7 +93,6 @@ export const getProducts = async (
 ) => {
 	try {
 		const data = await prisma.product.findMany();
-		// response success with a data
 		res.status(200).json(responseSuccessWithData(data));
 	} catch (error) {
 		// send to error handler
@@ -87,8 +108,7 @@ export const patchProduct = async (
 ) => {
 	const { id } = req.params;
 	const body = req.body;
-	console.log(id);
-	console.log(body);
+
 	if (!id || body) {
 		// send to error handler
 		next(new ValidationError("Id is required"));

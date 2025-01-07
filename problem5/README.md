@@ -15,3 +15,5 @@ Develop a backend server with ExpressJS. You are required to build a set of CRUD
    e. Delete a resource.
 2. You should connect your backend service with a simple database for data persistence.
 3. Provide [`README.md`](http://README.md) for the configuration and the way to run application.
+
+# Solution
