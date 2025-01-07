@@ -17,3 +17,35 @@ Develop a backend server with ExpressJS. You are required to build a set of CRUD
 3. Provide [`README.md`](http://README.md) for the configuration and the way to run application.
 
 # Solution
+
+This is a simple CRUD API that allows a user to interact with the service. The API is built using ExpressJS and TypeScript. The API provides the following endpoints:
+
+| Endpoint        | Method | Params                         | Body                                          | Description                     |
+| --------------- | ------ | ------------------------------ | --------------------------------------------- | ------------------------------- |
+| /product        | GET    | None                           | None                                          | Get all products                |
+| /product/:id    | GET    | None                           | None                                          | Get a product by its id         |
+| /product/       | POST   | None                           | `{ "name", "price", "stock", "description" }` | Create new product              |
+| /product/:id    | PATCH  | None                           | `{ "name", "price", "stock", "description" }` | Update product                  |
+| /product/:id    | DELETE | None                           | None                                          | Delete a specific product by id |
+| /product/       | DELETE | None                           | None                                          | Delete all products             |
+| /product/search | GET    | `name&description&price&stock` | None                                          | Filtering products              |
+
+## Installation & Setup
+
+Pre-requisites: Node and any package manager (npm or yarn) should be installed on your machine.
+
+For this simple example, I use sqlite for storingdata, so you don't need to install any database.
+
+Installing dependencies:
+
+```
+   yarn install
+```
+
+Run on Development:
+
+```
+   yarn dev
+```
+
+The server will be running on `http://localhost:3000`.
