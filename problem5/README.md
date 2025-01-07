@@ -49,3 +49,5 @@ Run on Development:
 ```
 
 The server will be running on `http://localhost:3000`.
+
+You can test the API by importing postman file `99tech.postman_collection.json`
